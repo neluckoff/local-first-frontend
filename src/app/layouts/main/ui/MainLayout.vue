@@ -19,8 +19,17 @@
       <q-footer>
         <q-toolbar class="bg-grey-3 text-black row">
           <q-btn round flat icon="insert_emoticon" class="q-mr-sm" />
-          <q-input rounded outlined dense class="WAL__field col-grow q-mr-sm" bg-color="white" v-model="message" placeholder="Type a message" />
-          <q-btn round flat icon="mic" />
+          <q-input
+              rounded
+              outlined
+              dense
+              class="WAL__field col-grow q-mr-sm"
+              bg-color="white"
+              v-model="message"
+              placeholder="Type a message"
+              @keydown.enter="sendMessage"
+          />
+          <q-btn round flat icon="mic" @click="sendMessage" />
         </q-toolbar>
       </q-footer>
     </q-layout>
@@ -33,8 +42,10 @@ import { ref, computed } from 'vue'
 import MenuHeaderWidget from "@/widgets/menu/header";
 import MenuSidebarWidget from "@/widgets/menu/sidebar";
 import {useChatsStore} from "@/app/providers/stores/chats";
+import {useMessagesStore} from "@/app/providers/stores/messages.js";
 
-const chatsStore = useChatsStore()
+const chatsStore = useChatsStore();
+const messagesStore = useMessagesStore();
 
 const conversations = computed(() => {
   return chatsStore.chatUsers;
@@ -49,6 +60,13 @@ const currentConversationIndex = ref(0)
 const currentConversation = computed(() => {
   return chatsStore.chatUsers[ currentConversationIndex.value ]
 })
+
+function sendMessage() {
+  if (message.value) {
+    messagesStore.addMyMessageByIndex(currentConversationIndex.value, message.value);
+    message.value = '';
+  }
+}
 
 const style = computed(() => ({
   height: $q.screen.height + 'px'

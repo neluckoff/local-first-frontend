@@ -46,13 +46,20 @@ export const useChatsStore = defineStore('chats', () => {
             sent: true
         }
     ]);
+    const activeChatIndex = ref<number>(null);
 
     function addChatUser(user: ChatUser) {
         chatUsers.value.push(user)
     }
 
+    function setActiveChatIndex(index: number) {
+        activeChatIndex.value = index;
+    }
+
     return {
         chatUsers,
-        addChatUser
+        activeChatIndex,
+        addChatUser,
+        setActiveChatIndex
     };
 });

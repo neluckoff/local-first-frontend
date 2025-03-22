@@ -1,13 +1,16 @@
 <script setup lang="ts">
 import PersonItemComponent from "@/components/person-item";
-import {ref} from "vue";
+import {ref, watch} from "vue";
 import ModalAlertWidget from "@/widgets/modal/alert/ui/ModalAlertWidget.vue";
+import {useChatsStore} from "@/app/providers/stores/chats.ts";
 
 interface MenuHeaderProps {
   conversations: object[];
   leftDrawerOpen: boolean;
   currentConversationIndex: number;
 }
+
+const chatsStore = useChatsStore();
 
 const search = ref('')
 const isAlertModalOpen = ref(false)
@@ -18,11 +21,15 @@ const emit = defineEmits<{
   (e: 'update:currentConversationIndex', data: number): void;
 }>()
 
+watch(() => props.currentConversationIndex, (index) => {
+  chatsStore.setActiveChatIndex(index);
+}, { immediate: true })
+
 function toggleLeftDrawer() {
   emit("update:leftDrawerOpen", !props.toggleLeftDrawer)
 }
 
-function setCurrentConversation (index) {
+function setCurrentConversation(index) {
   emit("update:currentConversationIndex", index);
 }
 </script>

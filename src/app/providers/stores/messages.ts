@@ -1,29 +1,28 @@
 import { defineStore } from 'pinia';
-import { type Ref, ref } from 'vue';
+import { ref } from 'vue';
+
+interface Messages {
+    myMessage: string[];
+    friendMessages: string[];
+}
 
 export const useMessagesStore = defineStore('messages', () => {
-    const messages = ref(null);
+   const messages = ref<Record<number, Messages>>({});
 
-    function updatePreviousRoute(value: RouteLocationNormalized) {
-        previousRoute.value = value;
-    }
-
-    function updateCurrentRoute(value: RouteLocationNormalized) {
-        currentRoute.value = value;
-    }
-
-    function updateAllRoutes(from: RouteLocationNormalized, to: RouteLocationNormalized) {
-        if (beforePreviousRoute.value?.fullPath !== previousRoute.value?.fullPath) beforePreviousRoute.value = _.clone(previousRoute.value);
-        previousRoute.value = from;
-        currentRoute.value = to;
+    function addMyMessageByIndex(index: number, message: string) {
+        if (messages.value[index]) {
+            messages.value[index].myMessage.push(message);
+        } else {
+            messages.value[index] = {
+                myMessage: [],
+                friendMessages: [],
+            };
+            messages.value[index].myMessage.push(message);
+        }
     }
 
     return {
-        previousRoute,
-        currentRoute,
-        beforePreviousRoute,
-        updatePreviousRoute,
-        updateCurrentRoute,
-        updateAllRoutes,
-    };
+        messages,
+        addMyMessageByIndex,
+    }
 });
