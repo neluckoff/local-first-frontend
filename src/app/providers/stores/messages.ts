@@ -1,12 +1,8 @@
-import type { RouteLocationNormalized } from 'vue-router';
-import _ from 'lodash';
 import { defineStore } from 'pinia';
-import { ref } from 'vue';
+import { type Ref, ref } from 'vue';
 
-export const useNavigationStore = defineStore('navigation', () => {
-    const previousRoute = ref<RouteLocationNormalized>(null);
-    const currentRoute = ref<RouteLocationNormalized>(null);
-    const beforePreviousRoute = ref<RouteLocationNormalized>(null);
+export const useMessagesStore = defineStore('messages', () => {
+    const messages = ref(null);
 
     function updatePreviousRoute(value: RouteLocationNormalized) {
         previousRoute.value = value;

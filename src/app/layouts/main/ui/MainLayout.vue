@@ -30,44 +30,15 @@
 <script setup>
 import { useQuasar } from 'quasar'
 import { ref, computed } from 'vue'
-import PersonItemComponent from "@/components/person-item/index.js";
-import MenuHeaderWidget from "@/widgets/menu/header/index.js";
-import MenuSidebarWidget from "@/widgets/menu/sidebar/index.js";
+import MenuHeaderWidget from "@/widgets/menu/header";
+import MenuSidebarWidget from "@/widgets/menu/sidebar";
+import {useChatsStore} from "@/app/providers/stores/chats";
 
-const conversations = [
-  {
-    id: 1,
-    person: 'Razvan Stoenescu',
-    avatar: 'https://cdn.quasar.dev/team/razvan_stoenescu.jpeg',
-    caption: 'I\'m working on Quasar!',
-    time: '15:00',
-    sent: true
-  },
-  {
-    id: 2,
-    person: 'Dan Popescu',
-    avatar: 'https://cdn.quasar.dev/team/dan_popescu.jpg',
-    caption: 'I\'m working on Quasar!',
-    time: '16:00',
-    sent: true
-  },
-  {
-    id: 3,
-    person: 'Jeff Galbraith',
-    avatar: 'https://cdn.quasar.dev/team/jeff_galbraith.jpg',
-    caption: 'I\'m working on Quasar!',
-    time: '18:00',
-    sent: true
-  },
-  {
-    id: 4,
-    person: 'Allan Gaunt',
-    avatar: 'https://cdn.quasar.dev/team/allan_gaunt.png',
-    caption: 'I\'m working on Quasar!',
-    time: '17:00',
-    sent: true
-  }
-]
+const chatsStore = useChatsStore()
+
+const conversations = computed(() => {
+  return chatsStore.chatUsers;
+})
 
 const $q = useQuasar()
 
@@ -76,7 +47,7 @@ const message = ref('')
 const currentConversationIndex = ref(0)
 
 const currentConversation = computed(() => {
-  return conversations[ currentConversationIndex.value ]
+  return chatsStore.chatUsers[ currentConversationIndex.value ]
 })
 
 const style = computed(() => ({

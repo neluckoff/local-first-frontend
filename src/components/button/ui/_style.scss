@@ -1,0 +1,11 @@
+.wrapper-btn {
+  button {
+    border-radius: 8px;
+  }
+  :deep(.block) {
+    padding: 4px 8px;
+  }
+  .disabled {
+    opacity: 0.4 !important;
+  }
+}

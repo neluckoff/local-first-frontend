@@ -16,9 +16,9 @@ export default defineConfig({
     },
   },
   scss: {
-    silenceDeprecations: ['legacy-js-api'],
     additionalData: `
-          	@import "@/app/styles/app.css";
+            @import "@/app/styles/variables.scss";
+          	@import "@/app/styles/app.scss";
           `,
   },
 })
