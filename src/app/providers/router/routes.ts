@@ -3,7 +3,9 @@ const routes = [
         path: '/',
         component: () => import('@/app/layouts/main'),
         children: [
-            {path: '', component: () => import('@/pages/main')},
+            { path: '', name: 'messages', component: () => import('@/pages/main') },
+            { path: '/disappearing', name: 'disappearing', component: () => import('@/pages/main') },
+            { path: '/settings', name: 'settings', component: () => import('@/pages/settings') },
         ]
     },
 

@@ -16,19 +16,21 @@ const friendMessages = computed(() => {
 </script>
 
 <template>
-  <div class="q-pa-md row justify-center">
-    <div style="width: 100%; max-width: 400px">
-      <q-chat-message
-          :text="myMessages"
-          sent
-      />
-      <q-chat-message
-          :text="friendMessages"
-      />
+  <q-page>
+    <div class="q-pa-md row justify-center full-height">
+      <div style="width: 100%; max-width: 400px">
+        <q-chat-message
+            :text="myMessages"
+            sent
+        />
+        <q-chat-message
+            :text="friendMessages"
+        />
+      </div>
     </div>
-  </div>
+  </q-page>
 </template>
 
 <style scoped lang="scss">
-
+@import "./style";
 </style>

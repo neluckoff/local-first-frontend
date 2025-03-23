@@ -1,6 +1,6 @@
 <template>
   <div class="WAL position-relative bg-grey-4" :style="style">
-    <q-layout view="lHh Lpr lFf" class="WAL__layout shadow-3" container>
+    <q-layout view="lHh Lpr lFf" class="WAL__layout shadow-3 full-height" container>
       <menu-header-widget
           :current-conversation="currentConversation"
           v-model:left-drawer-open="leftDrawerOpen"
@@ -12,11 +12,20 @@
           v-model:current-conversation-index="currentConversationIndex"
       />
 
-      <q-page-container class="bg-grey-2">
+      <q-page-container class="bg-grey-2 full-height">
+        <q-tabs
+            v-model="tab"
+            inline-label
+            class="bg-secondary text-white shadow-2 full-width"
+        >
+          <q-tab name="messages" icon="mail" label="Messages" />
+          <q-tab name="disappearing" icon="alarm" label="Disappearing messages" />
+          <q-tab name="settings" icon="settings" label="Settings" />
+        </q-tabs>
         <router-view />
       </q-page-container>
 
-      <q-footer>
+      <q-footer v-if="route.name !== 'settings'">
         <q-toolbar class="bg-grey-3 text-black row">
           <q-btn round flat icon="insert_emoticon" class="q-mr-sm" />
           <q-input
@@ -38,11 +47,12 @@
 
 <script setup>
 import { useQuasar } from 'quasar'
-import { ref, computed } from 'vue'
+import {ref, computed, watch, onMounted} from 'vue'
 import MenuHeaderWidget from "@/widgets/menu/header";
 import MenuSidebarWidget from "@/widgets/menu/sidebar";
 import {useChatsStore} from "@/app/providers/stores/chats";
 import {useMessagesStore} from "@/app/providers/stores/messages.js";
+import {useRoute, useRouter} from "vue-router";
 
 const chatsStore = useChatsStore();
 const messagesStore = useMessagesStore();
@@ -51,7 +61,14 @@ const conversations = computed(() => {
   return chatsStore.chatUsers;
 })
 
-const $q = useQuasar()
+const $q = useQuasar();
+const tab = ref('messages');
+const router = useRouter();
+const route = useRoute();
+
+watch(tab, (value) => {
+  router.push({ name: value })
+})
 
 const leftDrawerOpen = ref(false)
 const message = ref('')
@@ -71,6 +88,10 @@ function sendMessage() {
 const style = computed(() => ({
   height: $q.screen.height + 'px'
 }))
+
+onMounted(() => {
+  tab.value = route.name;
+})
 </script>
 
 <style lang="scss">
