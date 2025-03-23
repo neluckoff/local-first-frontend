@@ -1,3 +1,3 @@
-import ModalCenterComponent from "./ui/ModalCenterComponent.vue";
+import ModalCenterComponent from './ui/ModalCenterComponent.vue';
 
 export default ModalCenterComponent;

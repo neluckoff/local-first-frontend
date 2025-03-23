@@ -6,14 +6,13 @@ import quasarIconSet from 'quasar/icon-set/svg-eva-icons';
 import quasarLang from 'quasar/lang/ru';
 import { createApp } from 'vue';
 
-
 const app = createApp(App);
 const pinia = createPinia();
 
 app.use(Quasar, {
-    plugins: {},
-    lang: quasarLang,
-    iconSet: quasarIconSet,
+	plugins: {},
+	lang: quasarLang,
+	iconSet: quasarIconSet,
 });
 
 app.use(pinia);

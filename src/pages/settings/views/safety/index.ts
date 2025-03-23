@@ -1,3 +1,3 @@
-import SettingsSafetyView from "./ui/SettingsSafetyView.vue";
+import SettingsSafetyView from './ui/SettingsSafetyView.vue';
 
 export default SettingsSafetyView;

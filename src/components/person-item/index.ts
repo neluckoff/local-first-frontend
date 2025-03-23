@@ -1,3 +1,3 @@
-import PersonItemComponent from "./ui/PersonItemComponent.vue";
+import PersonItemComponent from './ui/PersonItemComponent.vue';
 
 export default PersonItemComponent;

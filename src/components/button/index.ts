@@ -1,3 +1,3 @@
-import ButtonComponent from "./ui/ButtonComponent.vue";
+import ButtonComponent from './ui/ButtonComponent.vue';
 
 export default ButtonComponent;

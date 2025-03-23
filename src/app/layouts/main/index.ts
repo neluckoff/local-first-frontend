@@ -1,3 +1,3 @@
-import MainLayout from "./ui/MainLayout.vue";
+import MainLayout from './ui/MainLayout.vue';
 
 export default MainLayout;

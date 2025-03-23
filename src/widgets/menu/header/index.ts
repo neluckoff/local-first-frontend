@@ -1,3 +1,3 @@
-import MenuHeaderWidget from "./ui/MenuHeaderWidget.vue";
+import MenuHeaderWidget from './ui/MenuHeaderWidget.vue';
 
 export default MenuHeaderWidget;
